@@ -146,7 +146,8 @@ public class MovieCollection
       listToSort.set(possibleIndex, temp);
     }
   }
-  
+
+
   private void displayMovieInfo(Movie movie)
   {
     System.out.println();
@@ -262,23 +263,49 @@ public class MovieCollection
   }
   
   private void listGenres(){
-    System.out.print("Enter the number of the genre of the movies you wish to see: ");
-    String searchTerm = scanner.nextLine();
+    ArrayList<Movie> genreList = new ArrayList<>();
 
     // arraylist to hold search results
     ArrayList<Movie> results = new ArrayList<Movie>();
 
-    // search through ALL movies in collection
+    // search through the genres
     for (int i = 0; i < movies.size(); i++)
     {
       String movieGenres = movies.get(i).getGenres();
       movieGenres = movieGenres.toLowerCase();
-      String[] genreList = movieGenres.split("\\|");
-      if (movieGenres.indexOf(searchTerm) != -1) {
-
-        //add the Movie object to the results list
-        results.add(movies.get(i));
+      String[] currentGenres = movieGenres.split("\\|");
+      for (int g = 0; g < currentGenres.length; g++){
+        if (genreList.contains(currentGenres[g]) != true){
+          genreList.add(currentGenres[g]);
+        }
       }
+
+    }
+
+    sortResults(genreList);
+    for (int i = 0; i < genreList.size(); i++)
+    {
+      String genre = genreList.get(i);
+
+      // this will print index 0 as choice 1 in the results list; better for user!
+      int choiceNum = i + 1;
+      System.out.println("" + choiceNum + ". " + genre);
+    }
+
+    System.out.println("Which genre would you like to see movies for?");
+    System.out.print("Enter number: ");
+    String genreTerm = scanner.nextLine();
+
+    for (int i = 0; i < movies.size(); i++) {
+      String movieGenres = movies.get(i).getGenres();
+      movieGenres = movieGenres.toLowerCase();
+      String[] currentGenres = movieGenres.split("\\|");
+      for (int g = 0; g < currentGenres.length; g++){
+        if (currentGenres[g].indexOf(genreTerm) != -1) {
+          //add the Movie object to the results list
+          results.add(movies.get(i));
+        }
+        }
     }
 
     // sort the results by title
@@ -308,7 +335,8 @@ public class MovieCollection
     System.out.println("\n ** Press Enter to Return to Main Menu **");
     scanner.nextLine();
   }
-  
+
+
   private void listHighestRated()
   {
   
