@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class MovieCollection
 {
   private ArrayList<Movie> movies;
@@ -276,7 +277,7 @@ public class MovieCollection
       String[] currentGenres = movieGenres.split("\\|");
       for (int g = 0; g < currentGenres.length; g++){
         if (genreList.contains(currentGenres[g]) != true){
-          genreList.add(currentGenres[g]);
+          genreList.add(movies.get(i).getGenres().substring(movies.get(i).getGenres().indexOf(currentGenres[g]), movies.get(i).getGenres().indexOf(currentGenres[g]) + movies.get(i).getGenres().length()));
         }
       }
 
