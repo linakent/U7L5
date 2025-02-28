@@ -72,6 +72,11 @@ public class Movie
     return genres;
   }
 
+  public String getOneGenre(int input){
+    String[] genresAry = genres.split("|");
+    return genresAry[input];
+  }
+
   public double getUserRating()
   {
     return userRating;

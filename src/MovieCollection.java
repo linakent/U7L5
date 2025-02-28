@@ -264,7 +264,7 @@ public class MovieCollection
   }
   
   private void listGenres(){
-    ArrayList<Movie> genreList = new ArrayList<>();
+    ArrayList genreList = new ArrayList<>();
 
     // arraylist to hold search results
     ArrayList<Movie> results = new ArrayList<Movie>();
@@ -277,7 +277,7 @@ public class MovieCollection
       String[] currentGenres = movieGenres.split("\\|");
       for (int g = 0; g < currentGenres.length; g++){
         if (genreList.contains(currentGenres[g]) != true){
-          genreList.add(movies.get(i).getGenres().substring(movies.get(i).getGenres().indexOf(currentGenres[g]), movies.get(i).getGenres().indexOf(currentGenres[g]) + movies.get(i).getGenres().length()));
+            genreList.add(movies.get(i).getOneGenre(g));
         }
       }
 
@@ -286,7 +286,7 @@ public class MovieCollection
     sortResults(genreList);
     for (int i = 0; i < genreList.size(); i++)
     {
-      String genre = genreList.get(i);
+      Object genre = genreList.get(i);
 
       // this will print index 0 as choice 1 in the results list; better for user!
       int choiceNum = i + 1;
